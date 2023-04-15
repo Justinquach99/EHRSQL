@@ -89,7 +89,7 @@ if __name__ == '__main__':
 
     if args.mode=='eval':
         import json
-        from T5.generate import generate_sql
+        from generate import generate_sql
         print("start inference")
         out_eval = generate_sql(model=model, eval_dataset=test_dataset, args=args, collator=data_collator, verbose=1)
         os.makedirs(output_path, exist_ok=True)

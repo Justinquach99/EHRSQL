@@ -40,7 +40,7 @@ class Config():
         self.parser.add_argument('--exp_name', type=str, default=None, help='name of the experiment')
         self.parser.add_argument('--load_model_path', type=str, default=None, help='path for retraining')
         self.parser.add_argument("--device", type=str, default='cuda')
-        self.parser.add_argument("--num_workers", type=int, default=10)
+        self.parser.add_argument("--num_workers", type=int, default=50)
         
         # training parameters
         self.parser.add_argument('--random_seed', type=int, default=0)

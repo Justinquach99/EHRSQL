@@ -53,7 +53,14 @@ nohup python3 main.py --config t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_nat
 ```
 The 'outputs' pathing should be automatically established from the given directory. The 'outputs' folder will store the 'eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid', 'eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid', 't5_ehrsql_eicu_natural_lr0.001', and 't5_ehrsql_mimic3_natural_lr0.001' (what folders get generated ultimately depends on which database was used [if eiCU, then only eiCU related folders get created; otherwise, MIMIC-III related folders]).
  
-As an additional note, nohup allows files to be ran in the background without the fear of the virtual machine terminating through timeout. 
+As an additional note, nohup allows files to be ran in the background without the fear of the virtual machine terminating through timeout. If no .out filename is given after the &> characters: "&> generate_train_for_mimic3_no_schema.out &". the default .out filename will simply be nohup.out. Here is how to view nohup files in real-time, and remove nohup files (referring to the examples above):
+```
+***View nohup.out files***
+tail -f generate_pred_for_mimic3_no_schema.out
+
+***generate_pred_for_mimic3_no_schema.out is an example. Simply replace this with your .out file***
+rm -rf generate_pred_for_mimic3_no_schema.out
+```
 
 # Continuation and Evaluation
 Once you have performed 'x' training steps, we can proceed to the next step. We can perform our SQL filtering at will by changing the threshold value. This filtering essentially performs the following task: if the question’s prediction confidence exceeds a given threshold, the resulting SQL query will not be generated and thus return a NULL value. This affects the final evaluation values.

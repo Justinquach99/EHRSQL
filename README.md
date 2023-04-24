@@ -1,7 +1,7 @@
 # EHRSQL Introduction
 This GitHub was created for CS-598 (Deep Learning for Healthcare) at UIUC for Spring 2023. EHRSQL aims to tackle question answering, and from those questions we generate SQL queries. The evaluations (found under the COMPLETE prefix folders) dictate how well it correctly recognizes as many possible answerable questions (while disregarding unanswerable queries) to gauge the overall model performance. The original GitHub that was used for this project can be found here: https://github.com/glee4810/EHRSQL.
 
-Though it may look like the code files remain unchanged, I had to manually go through each file that is linked to one another and change its pathing directories to work for my situation. For whatever reason, the codes simply could not find their associated files, even after verifying the pathing directory to be correct. As a workaround, I changed the pathing directories for each file as necessary and placed all of the files in the same folder. It explains why the 'project' folder contains more files than organized folders.
+**DISCLAIMER: Though it may look like the code files remain unchanged, I had to manually go through each file that is linked to one another and change its pathing directories to work for my situation. For whatever reason, the codes simply could not find their associated files, even after verifying the pathing directory to be correct. As a workaround, I changed the pathing directories for each file as necessary and placed all of the files in the same folder. It explains why the 'project' folder contains more files than organized folders.**
 
 # Acquiring Databases
 First, have credentialed access to MIMIC-III and eiCU on PhysioNet. Once you have obtained access, download the MIMIC-III database from https://physionet.org/content/mimiciii/1.4/ and the eiCU database from https://physionet.org/content/eicu-crd/2.0/.
@@ -42,9 +42,9 @@ python3 preprocess_db.py --data_dir <path_to_eicu_csv_files> --db_name eicu --de
 ```
 
 # Training
-To note, 't5_ehrsql_eicu_natural_lr0.001.yaml' and 't5_ehrsql_mimic3_natural_lr0.001.yaml' are your TRAINING files. This will be used with the config.py file (modify the amount of steps, or other hyperparameters like optim and amount of workers for example) to perform training. 
+To note, **'t5_ehrsql_eicu_natural_lr0.001.yaml'** and **'t5_ehrsql_mimic3_natural_lr0.001.yaml'** are your TRAINING files. This will be used with the config.py file (modify the amount of steps, or other hyperparameters like optim and amount of workers for example) to perform training. 
 
-Once 'x' amount of steps (x being whatever amount of steps that training should do before completion), we then use 't5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid.yaml' and 't5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid.yaml' for EVALUATION. For example:
+Once 'x' amount of steps (x being whatever amount of steps that training should do before completion), we then use **'t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid.yaml'** and **'t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid.yaml'** for EVALUATION. For example:
 ```
 ***Total training time will vary (based on your current computational resources), but personally, 
 with Google Cloud services, it took over a week to conduct the full 100000 steps for either eiCU or MIMIC-III***
@@ -53,9 +53,9 @@ nohup python3 main.py --config t5_ehrsql_mimic3_natural_lr0.001.yaml --CUDA_VISI
 ***This will generate the prediction_raw.json, which will eventually be used to generate the prediction.json.***
 nohup python3 main.py --config t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid.yaml --output_file prediction_raw.json --CUDA_VISIBLE_DEVICES "" --device "cpu" &> generate_pred_for_mimic3_no_schema.out &
 ```
-The 'outputs' pathing should be automatically established from the given directory. The 'outputs' folder will store the 'eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid', 'eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid', 't5_ehrsql_eicu_natural_lr0.001', and 't5_ehrsql_mimic3_natural_lr0.001' (what folders get generated ultimately depends on which database was used [if eiCU, then only eiCU related folders get created; otherwise, MIMIC-III related folders]).
+The 'outputs' pathing should be automatically established from the given directory. The 'outputs' folder will store the **'eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid', 'eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid', 't5_ehrsql_eicu_natural_lr0.001', and 't5_ehrsql_mimic3_natural_lr0.001'** (what folders get generated ultimately depends on which database was used [if eiCU, then only eiCU related folders get created; otherwise, MIMIC-III related folders]).
  
-As an additional note, nohup allows files to be ran in the background without the fear of the virtual machine terminating through timeout. If no .out filename is given after the &> characters: "&> generate_train_for_mimic3_no_schema.out &". the default .out filename will simply be nohup.out. Here is how to view nohup files in real-time, and remove nohup files (referring to the examples above):
+As an additional note, nohup allows files to be ran in the background without the fear of the virtual machine terminating through timeout. If no .out filename is given after the &> characters: **&> generate_train_for_mimic3_no_schema.out &**. the default .out filename will simply be nohup.out. Here is how to view nohup files in real-time, and remove nohup files (referring to the examples above):
 ```
 ***View nohup.out files***
 tail -f generate_pred_for_mimic3_no_schema.out
@@ -85,4 +85,4 @@ nohup python3 evaluate.py --db_path mimic_iii.db --data_file valid.json --pred_f
 
 ```
 
-To view these evaluations with varying threshold values, refer to the 'COMPLETE_eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid' and 'COMPLETE_eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid' folders for screenshots and their associated prediction_raw.json and prediction.json files.
+To view these evaluations with varying threshold values, refer to the **'COMPLETE_eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid'** and **'COMPLETE_eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid'** folders for screenshots and their associated prediction_raw.json and prediction.json files.

@@ -51,4 +51,23 @@ nohup python3 main.py --config t5_ehrsql_mimic3_natural_lr0.001.yaml --CUDA_VISI
 ***This will generate the prediction_raw.json, which will eventually be used to generate the prediction.json.***
 nohup python3 main.py --config t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid.yaml --output_file prediction_raw.json --CUDA_VISIBLE_DEVICES "" --device "cpu" &> generate_pred_for_mimic3_no_schema.out &
 ```
- The 'outputs' pathing should be automatically established from the given directory. The 'outputs' folder will store the 'eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid', 'eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid', 't5_ehrsql_eicu_natural_lr0.001', and 't5_ehrsql_mimic3_natural_lr0.001' (what folders get generated ultimately depends on which database was used [if eiCU, then only eiCU related folders get created; otherwise, MIMIC-III related folders]).
+The 'outputs' pathing should be automatically established from the given directory. The 'outputs' folder will store the 'eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid', 'eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid', 't5_ehrsql_eicu_natural_lr0.001', and 't5_ehrsql_mimic3_natural_lr0.001' (what folders get generated ultimately depends on which database was used [if eiCU, then only eiCU related folders get created; otherwise, MIMIC-III related folders]).
+ 
+As an additional note, nohup allows files to be ran in the background without the fear of the virtual machine terminating through timeout. 
+
+# Continuation and Evaluation
+Once you have performed 'x' training steps, we can proceed to the next step. We can perform our SQL filtering at will by changing the threshold value. This filtering essentially performs the following task: if the question’s prediction confidence exceeds a given threshold, the resulting SQL query will not be generated and thus return a NULL value. This affects the final evaluation values.
+
+```
+***Using threshold values and producing prediction.json from prediction_raw.json***
+nohup python3 abstain_with_entropy.py --infernece_result_path outputs/eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid --input_file prediction_raw.json --output_file prediction.json --threshold 0.14144589 &> create_prediction_json_mimic3_no_schema.out &
+nohup python3 abstain_with_entropy.py --infernece_result_path outputs/eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid --input_file prediction_raw.json  --output_file prediction.json --threshold 0.22580192 &> create_prediction_json_eicu_no_schema.out &
+
+***Performing evaluations with directory pathing to a database***
+nohup python3 evaluate.py --db_path ./dataset/ehrsql/mimic_iii/mimic_iii.db --data_file dataset/ehrsql/mimic_iii/valid.json --pred_file ./outputs/eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid/prediction.json &> eval_SQL.out &
+
+***Performing evaluations with database files within a given folder***
+nohup python3 evaluate.py --db_path eicu.db --data_file valid.json --pred_file ./outputs/eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid/prediction.json &> eval_SQL_eicu_no_schema.out &
+nohup python3 evaluate.py --db_path mimic_iii.db --data_file valid.json --pred_file ./outputs/eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid/prediction.json &> eval_SQL_mimic3_no_schema.out &
+
+```

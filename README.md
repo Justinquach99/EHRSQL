@@ -1,5 +1,7 @@
-# EHRSQL
+# EHRSQL Introduction
 This GitHub was created for CS-598 (Deep Learning for Healthcare) at UIUC for Spring 2023. EHRSQL aims to tackle question answering, and from those questions we generate SQL queries. The evaluations (found under the COMPLETE prefix folders) dictate how well it correctly recognizes as many possible answerable questions (while disregarding unanswerable queries) to gauge the overall model performance. The original GitHub that was used for this project can be found here: https://github.com/glee4810/EHRSQL.
+
+Though it may look like the code files remain unchanged, I had to manually go through each file that is linked to one another and change its pathing directories to work for my situation. For whatever reason, the codes simply could not find their associated files, even after verifying the pathing directory to be correct. As a workaround, I changed the pathing directories for each file as necessary and placed all of the files in the same folder. It explains why the 'project' folder contains more files than organized folders.
 
 # Acquiring Databases
 First, have credentialed access to MIMIC-III and eiCU on PhysioNet. Once you have obtained access, download the MIMIC-III database from https://physionet.org/content/mimiciii/1.4/ and the eiCU database from https://physionet.org/content/eicu-crd/2.0/.

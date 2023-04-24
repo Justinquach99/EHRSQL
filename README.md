@@ -44,7 +44,8 @@ To note, 't5_ehrsql_eicu_natural_lr0.001.yaml' and 't5_ehrsql_mimic3_natural_lr0
 
 Once 'x' amount of steps (x being whatever amount of steps that training should do before completion), we then use 't5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid.yaml' and 't5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid.yaml' for EVALUATION. For example:
 ```
-***Total training time will vary (based on your current computational resources), but personally, with Google Cloud services, it took over a week to conduct the full 100000 steps for either eiCU or MIMIC-III***
+***Total training time will vary (based on your current computational resources), but personally, 
+with Google Cloud services, it took over a week to conduct the full 100000 steps for either eiCU or MIMIC-III***
 nohup python3 main.py --config t5_ehrsql_mimic3_natural_lr0.001.yaml --CUDA_VISIBLE_DEVICES "" --device "cpu" &> generate_train_for_mimic3_no_schema.out &
 
 ***This will generate the prediction_raw.json, which will eventually be used to generate the prediction.json.***

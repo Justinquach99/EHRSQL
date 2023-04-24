@@ -8,7 +8,7 @@ This GitHub was created for CS-598 (Deep Learning for Healthcare) at UIUC for Sp
 # Acquiring Databases
 First, have credentialed access to MIMIC-III and eiCU on PhysioNet. Once you have obtained access, download the MIMIC-III database from https://physionet.org/content/mimiciii/1.4/ and the eiCU database from https://physionet.org/content/eicu-crd/2.0/.
 
-#Installation
+# Installation
 Ensure pip is installed for your machine. These tasks should be completed before running codes:
 ```
 git clone https://github.com/glee4810/EHRSQL.git

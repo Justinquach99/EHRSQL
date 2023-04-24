@@ -63,6 +63,10 @@ Once you have performed 'x' training steps, we can proceed to the next step. We 
 nohup python3 abstain_with_entropy.py --infernece_result_path outputs/eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid --input_file prediction_raw.json --output_file prediction.json --threshold 0.14144589 &> create_prediction_json_mimic3_no_schema.out &
 nohup python3 abstain_with_entropy.py --infernece_result_path outputs/eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid --input_file prediction_raw.json  --output_file prediction.json --threshold 0.22580192 &> create_prediction_json_eicu_no_schema.out &
 
+```
+
+We can perform evaluations either through absolute pathing, or both database files (eicu.db or mimic_iii.db) being found in the same folder.
+```
 ***Performing evaluations with directory pathing to a database***
 nohup python3 evaluate.py --db_path ./dataset/ehrsql/mimic_iii/mimic_iii.db --data_file dataset/ehrsql/mimic_iii/valid.json --pred_file ./outputs/eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid/prediction.json &> eval_SQL.out &
 

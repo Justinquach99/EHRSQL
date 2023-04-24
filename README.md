@@ -84,3 +84,5 @@ nohup python3 evaluate.py --db_path eicu.db --data_file valid.json --pred_file .
 nohup python3 evaluate.py --db_path mimic_iii.db --data_file valid.json --pred_file ./outputs/eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid/prediction.json &> eval_SQL_mimic3_no_schema.out &
 
 ```
+
+To view these evaluations with varying threshold values, refer to the 'COMPLETE_eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid' and 'COMPLETE_eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid' folders for screenshots and their associated prediction_raw.json and prediction.json files.

@@ -3,7 +3,7 @@ This GitHub was created for CS-598 (Deep Learning for Healthcare) at UIUC for Sp
 
 **DISCLAIMER: Though it may look like the code files remain unchanged, I had to manually go through each file that is linked to one another and change its pathing directories to work for my situation. For whatever reason, the codes simply could not find their associated files, even after verifying the pathing directory to be correct. As a workaround, I changed the pathing directories for each file as necessary and placed all of the files in the same folder. It explains why the 'project' folder contains more files than organized folders.**
 
-**In addition, the outputs folder does not exist for this GitHub because I am unable to download the massive 'checkpoint_best.pth.tar' without the Google Cloud machine terminating before completing the download. This file is necessary in order to generate the prediction_raw.json, which will be obtained after training has been completed. I have attempted to use gsutil to download objects from buckets, but I have insufficient permissions to perform this task. Thus, outputs folder has been omitted.**
+**In addition, the outputs folder does not exist for this GitHub because I am unable to download the massive 'checkpoint_best.pth.tar' without the Google Cloud machine terminating before completing the download. This file is necessary in order to generate the prediction_raw.json, which will be obtained after training has been completed. I have attempted to use gsutil to download objects from buckets, but I have insufficient permissions (most likely stemming from using solely a free trial) to perform this task. Thus, outputs folder has been omitted.**
 
 # Acquiring Databases
 First, have credentialed access to MIMIC-III and eiCU on PhysioNet. Once you have obtained access, download the MIMIC-III database from https://physionet.org/content/mimiciii/1.4/ and the eiCU database from https://physionet.org/content/eicu-crd/2.0/.
@@ -66,8 +66,6 @@ tail -f generate_pred_for_mimic3_no_schema.out
 rm -rf generate_pred_for_mimic3_no_schema.out
 ```
 
-To clarify, the threshold values 0.14144589 and 0.22580192 were the default I used that stems from the authors' GitHub. The threshold value -1 is the actual default value that the code defaults to, and will generate probable evaluations, unlike -3. This default value is explicitly stated in **abstain_with_entropy.py**.
-
 # Continuation and Evaluation
 Once you have performed 'x' training steps, we can proceed to the next step. We can perform our SQL filtering at will by changing the threshold value. This filtering essentially performs the following task: if the question’s prediction confidence exceeds a given threshold, the resulting SQL query will not be generated and thus return a NULL value. This affects the final evaluation values.
 
@@ -78,7 +76,7 @@ nohup python3 abstain_with_entropy.py --infernece_result_path outputs/eval_t5_eh
 
 ```
 
-We can perform evaluations either through absolute pathing, or both database files (eicu.db or mimic_iii.db) being found in the same folder.
+We can perform evaluations either through giving --db_path a designated path, or both database files (eicu.db or mimic_iii.db) being found in the same folder.
 ```
 ***Performing evaluations with directory pathing to a database***
 nohup python3 evaluate.py --db_path ./dataset/ehrsql/mimic_iii/mimic_iii.db --data_file dataset/ehrsql/mimic_iii/valid.json --pred_file ./outputs/eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid/prediction.json &> eval_SQL.out &
@@ -89,7 +87,11 @@ nohup python3 evaluate.py --db_path mimic_iii.db --data_file valid.json --pred_f
 
 ```
 
+<<<<<<< HEAD
 To view these evaluations with varying threshold values, refer to the **'COMPLETE_eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid'** and **'COMPLETE_eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid'** folders for screenshots and their associated prediction_raw.json and prediction.json files.
+=======
+To view these evaluations with varying threshold values, refer to the **'COMPLETE_eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid'** and **'COMPLETE_eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid'** folders for screenshots and their associated prediction_raw.json and prediction.json files. You can experiment with other threshold values and see how the results vary.
+>>>>>>> 07a40dd1c8f516f98b51337f3e653bd636cfdad9
 
 # Credits
 

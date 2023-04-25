@@ -36,14 +36,14 @@ pip install numpy
 ```
 
 # Preprocessing
-If you are using this GitHub, the data should already be preprocessed. If not, using the downloaded database files, perform the following commands:
+Since this GitHub does not include the **MIMIC-III.db** or **eiCU.db** files, please download the aforementioned .db files and place them into the **project** folder. The database files will be used during evaluations as the final step. If you are using this GitHub, the data should already be preprocessed. If not, using the downloaded database files, perform the following commands:
 ```
 cd preprocess
 python3 preprocess_db.py --data_dir <path_to_mimic_iii_csv_files> --db_name mimic_iii --deid --timeshift --current_time "2105-12-31 23:59:00" --start_year 2100 --time_span 5 --cur_patient_ratio 0.1 &
 python3 preprocess_db.py --data_dir <path_to_eicu_csv_files> --db_name eicu --deid --timeshift --current_time "2105-12-31 23:59:00" --start_year 2100 --time_span 5 --cur_patient_ratio 0.1
 ```
 
-# Training
+# Training and Generating Prediction Files
 To note, **'t5_ehrsql_eicu_natural_lr0.001.yaml'** and **'t5_ehrsql_mimic3_natural_lr0.001.yaml'** are your TRAINING files. This will be used with the config.py file (modify the amount of steps, or other hyperparameters like optim and amount of workers for example) to perform training. 
 
 Once 'x' amount of steps (x being whatever amount of steps that training should do before completion), we then use **'t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid.yaml'** and **'t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid.yaml'** for EVALUATION. For example:
@@ -65,6 +65,8 @@ tail -f generate_pred_for_mimic3_no_schema.out
 ***generate_pred_for_mimic3_no_schema.out is an example. Simply replace this with your .out file***
 rm -rf generate_pred_for_mimic3_no_schema.out
 ```
+
+To clarify, the threshold values 0.14144589 and 0.22580192 were the default I used that stems from the authors' GitHub. The threshold value -1 is the actual default value that the code defaults to, and will generate probable evaluations, unlike -3. This default value is explicitly stated in **abstain_with_entropy.py**.
 
 # Continuation and Evaluation
 Once you have performed 'x' training steps, we can proceed to the next step. We can perform our SQL filtering at will by changing the threshold value. This filtering essentially performs the following task: if the question’s prediction confidence exceeds a given threshold, the resulting SQL query will not be generated and thus return a NULL value. This affects the final evaluation values.
@@ -88,3 +90,9 @@ nohup python3 evaluate.py --db_path mimic_iii.db --data_file valid.json --pred_f
 ```
 
 To view these evaluations with varying threshold values, refer to the **'COMPLETE_eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid'** and **'COMPLETE_eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid'** folders for screenshots and their associated prediction_raw.json and prediction.json files.
+
+# Credits
+
+Authors for the EHRSQL paper: Gyubok Lee, Hyeonji Hwang, Seongsu Bae, Yeonsu Kwon, Woncheol Shin, Seongjun Yang, Minjoon Seo, Jong-Yeup Kim, Edward Choi
+
+Link to EHRSQL paper: https://arxiv.org/abs/2301.07695

@@ -76,7 +76,7 @@ nohup python3 abstain_with_entropy.py --infernece_result_path outputs/eval_t5_eh
 
 ```
 
-We can perform evaluations either through absolute pathing, or both database files (eicu.db or mimic_iii.db) being found in the same folder.
+We can perform evaluations either through giving --db_path a designated path, or both database files (eicu.db or mimic_iii.db) being found in the same folder.
 ```
 ***Performing evaluations with directory pathing to a database***
 nohup python3 evaluate.py --db_path ./dataset/ehrsql/mimic_iii/mimic_iii.db --data_file dataset/ehrsql/mimic_iii/valid.json --pred_file ./outputs/eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid/prediction.json &> eval_SQL.out &

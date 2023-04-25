@@ -88,3 +88,9 @@ nohup python3 evaluate.py --db_path mimic_iii.db --data_file valid.json --pred_f
 ```
 
 To view these evaluations with varying threshold values, refer to the **'COMPLETE_eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid'** and **'COMPLETE_eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid'** folders for screenshots and their associated prediction_raw.json and prediction.json files.
+
+# Credits
+
+Authors for the EHRSQL paper: Gyubok Lee, Hyeonji Hwang, Seongsu Bae, Yeonsu Kwon, Woncheol Shin, Seongjun Yang, Minjoon Seo, Jong-Yeup Kim, Edward Choi
+
+Link to EHRSQL paper: https://arxiv.org/abs/2301.07695

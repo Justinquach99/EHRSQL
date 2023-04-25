@@ -89,8 +89,8 @@ We can perform evaluations either through giving --db_path a designated path, or
 nohup python3 evaluate.py --db_path ./dataset/ehrsql/mimic_iii/mimic_iii.db --data_file dataset/ehrsql/mimic_iii/valid.json --pred_file ./outputs/eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid/prediction.json &> eval_SQL.out &
 
 ***Performing evaluations with database files within a given folder***
-nohup python3 evaluate.py --db_path eicu.db --data_file valid.json --pred_file ./outputs/eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid/prediction.json &> eval_SQL_eicu_no_schema.out &
-nohup python3 evaluate.py --db_path mimic_iii.db --data_file valid.json --pred_file ./outputs/eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid/prediction.json &> eval_SQL_mimic3_no_schema.out &
+nohup python3 evaluate.py --db_path eicu.db --data_file valid_eicu.json --pred_file ./outputs/eval_t5_ehrsql_eicu_natural_lr0.001_best__eicu_natural_valid/prediction.json &> eval_SQL_eicu_no_schema.out &
+nohup python3 evaluate.py --db_path mimic_iii.db --data_file valid_mimic_iii.json --pred_file ./outputs/eval_t5_ehrsql_mimic3_natural_lr0.001_best__mimic3_natural_valid/prediction.json &> eval_SQL_mimic3_no_schema.out &
 
 ```
 

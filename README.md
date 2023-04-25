@@ -5,6 +5,9 @@ This GitHub was created for CS-598 (Deep Learning for Healthcare) at UIUC for Sp
 
 **In addition, the outputs folder does not exist for this GitHub because I am unable to download the massive 'checkpoint_best.pth.tar' without the Google Cloud machine terminating before completing the download. This file is necessary in order to generate the prediction_raw.json, which will be obtained after training has been completed. I have attempted to use gsutil to download objects from buckets, but I have insufficient permissions (most likely stemming from using solely a free trial) to perform this task. Thus, outputs folder has been omitted.**
 
+# Getting Started
+All relevant codes and .json files can be found under the **project** folder.
+
 # Acquiring Databases
 First, have credentialed access to MIMIC-III and eiCU on PhysioNet. Once you have obtained access, download the MIMIC-III database from https://physionet.org/content/mimiciii/1.4/ and the eiCU database from https://physionet.org/content/eicu-crd/2.0/.
 

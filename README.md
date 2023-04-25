@@ -36,7 +36,7 @@ pip install numpy
 ```
 
 # Preprocessing
-If you are using this GitHub, the data should already be preprocessed. If not, using the downloaded database files, perform the following commands:
+Since this GitHub does not include the **MIMIC-III.db** or **eiCU.db** files, please download the aforementioned .db files and place them into the **project** folder. The database files will be used during evaluations as the final step. If you are using this GitHub, the data should already be preprocessed. If not, using the downloaded database files, perform the following commands:
 ```
 cd preprocess
 python3 preprocess_db.py --data_dir <path_to_mimic_iii_csv_files> --db_name mimic_iii --deid --timeshift --current_time "2105-12-31 23:59:00" --start_year 2100 --time_span 5 --cur_patient_ratio 0.1 &

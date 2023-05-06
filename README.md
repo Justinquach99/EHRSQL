@@ -69,7 +69,7 @@ rm -rf generate_pred_for_mimic3_no_schema.out
 To clarify, the threshold values 0.14144589 and 0.22580192 were the default I used that stems from the authors' GitHub. The threshold value -1 is the actual default value that the code defaults to, and will generate probable evaluations, unlike -3. This default value is explicitly stated in **abstain_with_entropy.py**.
 
 # Continuation and Evaluation
-Once you have performed 'x' training steps, we can proceed to the next step. We can perform our SQL filtering at will by changing the threshold value. This filtering essentially performs the following task: if the question’s prediction confidence exceeds a given threshold, the resulting SQL query will not be generated and thus return a NULL value. This affects the final evaluation values.
+Once you have performed 'x' training steps, we can proceed to the next step as long as the prediction_raw.json file exists. We can perform our SQL filtering at will by changing the threshold value. This filtering essentially performs the following task: if the question’s prediction confidence exceeds a given threshold, the resulting SQL query will not be generated and thus return a NULL value. This affects the final evaluation values.
 
 ```
 ***Using threshold values and producing prediction.json from prediction_raw.json***

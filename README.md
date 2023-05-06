@@ -42,12 +42,7 @@ pip install numpy
 ```
 
 # Preprocessing
-Since this GitHub does not include the **MIMIC-III.db** or **eiCU.db** files, please download the aforementioned .db files and place them into the **project** folder. The database files will be used during evaluations as the final step. If you are using this GitHub, the data should already be preprocessed. If not, using the downloaded database files, perform the following commands:
-```
-cd preprocess
-python3 preprocess_db.py --data_dir <path_to_mimic_iii_csv_files> --db_name mimic_iii --deid --timeshift --current_time "2105-12-31 23:59:00" --start_year 2100 --time_span 5 --cur_patient_ratio 0.1 &
-python3 preprocess_db.py --data_dir <path_to_eicu_csv_files> --db_name eicu --deid --timeshift --current_time "2105-12-31 23:59:00" --start_year 2100 --time_span 5 --cur_patient_ratio 0.1
-```
+Since this GitHub does not include the **MIMIC-III.db** or **eiCU.db** files, please download the aforementioned .db files and place them into the **project** folder. The database files will be used during evaluations as the final step. If you are using this GitHub, the data should already be preprocessed. If not, please refer to the author's GitHub to undergo preprocessing: https://github.com/glee4810/EHRSQL
 
 # Training and Generating Prediction Files
 To note, **'t5_ehrsql_eicu_natural_lr0.001.yaml'** and **'t5_ehrsql_mimic3_natural_lr0.001.yaml'** are your TRAINING files. This will be used with the config.py file (modify the amount of steps, or other hyperparameters like optim and amount of workers for example) to perform training. 
